@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 
 const playersRouter = require("./routes/players");
+const teamsRouter = require("./routes/teams");
 const usersRouter = require("./routes/users");
 
 app.use(bodyParser.json());
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/players", playersRouter);
+app.use("/teams", teamsRouter);
 app.use("/users", usersRouter);
 
 app.listen(3000, "127.0.0.1", () => {
