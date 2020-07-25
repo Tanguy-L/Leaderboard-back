@@ -1,13 +1,12 @@
-const Matches = require("../models").Matches;
-const Match_Participants = require("../models").Match_Participants;
-const Teams = require("../models").Teams;
+const Match = require("../models").Match;
+const Match_Participant = require("../models").Match_Participant;
 const Game = require("../models").Game;
 const Rule = require("../models").Rule;
 
 /*** MATCHES ***/
 exports.getMatches = async (req, res) => {
   try {
-    const result = await Matches.findAll();
+    const result = await Match.findAll();
     res.send(result);
   } catch (err) {
     console.log(err);
@@ -17,7 +16,7 @@ exports.getMatches = async (req, res) => {
 
 exports.addMatch = async (req, res) => {
   try {
-    const result = await Matches.create(req.body);
+    const result = await Match.create(req.body);
     res.send(result);
   } catch (err) {
     console.log(err);
@@ -28,7 +27,7 @@ exports.addMatch = async (req, res) => {
 exports.modifyMatch = async (req, res) => {
   try {
     const matchId = req.params.match_id;
-    const result = (await Matches.findAll({ where: { id: matchId }})).pop();
+    const result = (await Match.findAll({ where: { id: matchId }})).pop();
     result.start_at = req.body.start_at;
     result.end_at = req.body.end_at;
     result.game = req.body.game;
@@ -44,7 +43,7 @@ exports.modifyMatch = async (req, res) => {
 exports.removeMatch = async (req, res) => {
   try {
     const matchId = req.params.match_id;
-    const result = (await Matches.findAll({ where: { id: matchId }})).pop();
+    const result = (await Match.findAll({ where: { id: matchId }})).pop();
     result.destroy();
     res.send(200);
   } catch (err) {
@@ -53,12 +52,12 @@ exports.removeMatch = async (req, res) => {
   }
 }
 
-/*** MATCHES ***/
+/*** MATCH PARTICPANTS ***/
 exports.getMatchParticpants = async (req, res) => {
   try {
-    const userId = req.params.user_id;
-    const result = await Player.findAll({
-      where: { user: userId }
+    const matchId = req.params.match_id;
+    const result = await Match_Participant.findAll({
+      where: { match_id: matchId }
     });
     res.send(result);
   } catch (err) {
@@ -73,7 +72,7 @@ exports.addMatchParticpant = async (req, res) => {
     const { teams } = req.body;
     const result = [];
     for (team of teams)
-      result.push(await Match_Participants.create({
+      result.push(await Match_Participant.create({
         team_id: team,
         match_id: matchId
       }));
@@ -88,7 +87,7 @@ exports.removeMatchParticpant = async (req, res) => {
   try {
     const teamId = req.params.team_id;
     const matchId = req.params.match_id;
-    const result = (await Team_Player.findAll({
+    const result = (await Match_Participant.findAll({
       where: {
         team_id: teamId,
         match_id: matchId
@@ -107,7 +106,7 @@ exports.modifyMatchGame = async (req, res) => {
   try {
     const matchId = req.params.match_id;
     const gameId = req.params.game_id;
-    const result = (await Matches.findAll({ where: { id: matchId }})).pop();
+    const result = (await Match.findAll({ where: { id: matchId }})).pop();
     result.game = gameId;
     result.save();
     res.send(result);
@@ -121,7 +120,7 @@ exports.modifyMatchRule = async (req, res) => {
   try {
     const matchId = req.params.match_id;
     const ruleId = req.params.rule_id;
-    const result = (await Matches.findAll({ where: { id: matchId }})).pop();
+    const result = (await Match.findAll({ where: { id: matchId }})).pop();
     result.rule = ruleId;
     result.save();
     res.send(result);
