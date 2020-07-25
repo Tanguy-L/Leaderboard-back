@@ -6,6 +6,7 @@ const app = express();
 const playersRouter = require("./routes/players");
 const teamsRouter = require("./routes/teams");
 const usersRouter = require("./routes/users");
+const gamesRouter = require("./routes/games");
 
 app.use(bodyParser.json());
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/players", playersRouter);
 app.use("/teams", teamsRouter);
 app.use("/users", usersRouter);
+app.use("/games", gamesRouter);
 
 app.listen(3000, "127.0.0.1", () => {
     console.log(`[SERVER] HTTP server listening at http://127.0.0.1:3000 in ${process.env.NODE_ENV} mode`);
