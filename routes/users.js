@@ -9,5 +9,5 @@ usersRouter.put("/:user_id", controllers.modifyUser);
 usersRouter.delete("/:user_id", controllers.removeUser);
 
 usersRouter.get("/:user_id/player", controllers.getUserPlayer);
-usersRouter.post("/:user_id/player", controllers.addUserPlayer);
+usersRouter.post("/:user_id/player/:player_id", controllers.addUserPlayer);
 usersRouter.delete("/:user_id/player", controllers.removeUserPlayer);
