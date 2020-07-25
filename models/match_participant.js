@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Match_Participant.associate = function(models) {
-    this.belongsToMany(models.Teams, { foreignKey: "team_id" });
-    this.belongsToMany(models.Match, { foreignKey: "match_id" });
+    this.belongsTo(models.Team, { foreignKey: "team_id" });
+    this.belongsTo(models.Team, { foreignKey: "team_id" });
   };
   return Match_Participant;
 };

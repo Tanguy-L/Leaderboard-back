@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Player.associate = function(models) {
-    this.belongsTo(model.User, { foreignKey: "user" });
-    this.hasOne(model.Team_Player, { foreignKey: "player_id" });
+    this.belongsTo(models.User, { foreignKey: "user" });
+    this.hasOne(models.Team_Player, { foreignKey: "player_id" });
   };
   return Player;
 };
