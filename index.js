@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 
 const playersRouter = require("./routes/players");
+const matchesRouter = require("./routes/matches");
 const teamsRouter = require("./routes/teams");
 const usersRouter = require("./routes/users");
 const gamesRouter = require("./routes/games");
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/players", playersRouter);
+app.use("/matches", matchesRouter);
 app.use("/teams", teamsRouter);
 app.use("/users", usersRouter);
 app.use("/games", gamesRouter);
