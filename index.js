@@ -7,6 +7,7 @@ const playersRouter = require("./routes/players");
 const teamsRouter = require("./routes/teams");
 const usersRouter = require("./routes/users");
 const gamesRouter = require("./routes/games");
+const rulesRouter = require("./routes/rules");
 
 app.use(bodyParser.json());
 
@@ -19,6 +20,7 @@ app.use("/players", playersRouter);
 app.use("/teams", teamsRouter);
 app.use("/users", usersRouter);
 app.use("/games", gamesRouter);
+app.use("/rules", rulesRouter);
 
 app.listen(3000, "127.0.0.1", () => {
     console.log(`[SERVER] HTTP server listening at http://127.0.0.1:3000 in ${process.env.NODE_ENV} mode`);
