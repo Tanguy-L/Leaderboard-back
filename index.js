@@ -1,5 +1,6 @@
 const { version } = require("./package.json");
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require("express");
 const app = express();
 
@@ -10,10 +11,10 @@ const usersRouter = require("./routes/users");
 const gamesRouter = require("./routes/games");
 const rulesRouter = require("./routes/rules");
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    const { version } = require("./package.json");
     res.end("PLG LAN Leaderboard API v" + version, 200);
 });
 
