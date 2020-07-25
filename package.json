@@ -1,16 +1,20 @@
 {
-  "name": "api_plg_lan",
+  "name": "leaderboard-back",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/Tanguy-L/Leaderboard-back.git",
+  "author": "Hugo Mouchel <hugomouchel21@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0",
-    "koa2-cors": "^2.0.6",
-    "nodemon": "^1.19.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "sequelize": "^6.3.3"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
   }
 }
