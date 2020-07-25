@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     },
     end_at: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DATE
     },
     game: {
