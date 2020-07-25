@@ -101,6 +101,51 @@ exports.removeMatchParticpant = async (req, res) => {
   }
 }
 
+/*** MATCHES RESULT ***/
+exports.getMatchResult = async (req, res) => {
+  try {
+    const matchId = req.params.match_id;
+    const matchRule = (await Match.findAll({
+      where: { id: matchId },
+      include: [Rule]
+    })).pop().dataValues.Rule.dataValues;
+    const match_particpants = (await Match_Participant.findAll({
+      where: { match_id: matchId }
+    }));
+
+    const winners = match_particpants.reduce((winners, team) => (winners += team.is_winner ? 1 : 0), 0);
+    const result = match_particpants.map(team => ({
+      team: team.team_id,
+      score: winners == 1 ? (team.is_winner ? matchRule.win : matchRule.lost) : matchRule.equality,
+      is_winner: team.is_winner
+    }))
+
+    res.send(winners != 0 ? result : 204);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+}
+
+exports.addMatchResult = async (req, res) => {
+  try {
+    const matchId = req.params.match_id;
+    (await Match_Participant.findAll({
+      where: {
+        match_id: matchId,
+        team_id: req.body.winners
+      }
+    })).forEach(team => {
+      team.is_winner = true;
+      team.save();
+    });
+    res.send(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+}
+
 /*** MATCHES GAMES AND RULES ***/
 exports.modifyMatchGame = async (req, res) => {
   try {

@@ -12,5 +12,8 @@ matchesRouter.get("/:match_id/participants", controllers.getMatchParticpants);
 matchesRouter.post("/:match_id/participants/", controllers.addMatchParticpant);
 matchesRouter.delete("/:match_id/participants/:team_id", controllers.removeMatchParticpant);
 
-matchesRouter.post("/:match_id/game/:game_id", controllers.modifyMatchGame);
+matchesRouter.get("/:match_id/result", controllers.getMatchResult);
+matchesRouter.post("/:match_id/result", controllers.addMatchResult);
+
+matchesRouter.post("/:match_id/rule/:rule_id", controllers.modifyMatchRule);
 matchesRouter.post("/:match_id/rule/:rule_id", controllers.modifyMatchRule);

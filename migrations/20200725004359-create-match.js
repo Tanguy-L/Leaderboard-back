@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       end_at: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       game: {
