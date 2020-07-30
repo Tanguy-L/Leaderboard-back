@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "Eonpetelq5",
     "database": "plg_lan_leaderboard",
     "host": "127.0.0.1",
     "dialect": "mysql",

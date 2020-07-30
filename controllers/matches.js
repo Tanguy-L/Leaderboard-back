@@ -116,11 +116,11 @@ exports.getMatchResult = async (req, res) => {
     const winners = match_particpants.reduce((winners, team) => (winners += team.is_winner ? 1 : 0), 0);
     const result = match_particpants.map(team => ({
       team: team.team_id,
-      score: winners == 1 ? (team.is_winner ? matchRule.win : matchRule.lost) : matchRule.equality,
+      score: winners == 1 ? (team.is_winner ? matchRule.win : matchRule.lost) : (winners == 2 ? matchRule.equality : null),
       is_winner: team.is_winner
     }))
 
-    res.send(winners != 0 ? result : 204);
+    res.send(result);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
