@@ -4,6 +4,7 @@ module.exports = {
     return queryInterface.createTable('Team_Players', {
       player_id: {
         allowNull: false,
+        unique: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
         references: {

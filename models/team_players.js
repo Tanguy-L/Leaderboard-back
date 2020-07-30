@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Team_Player = sequelize.define('Team_Player', {
     player_id: {
       allowNull: false,
+      unique: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
@@ -16,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN
     }
   }, {});
-  Team_Player.associate = function(models) {
+  Team_Player.associate = function (models) {
     this.belongsTo(models.Player, { foreignKey: "player_id" });
     this.belongsTo(models.Team, { foreignKey: "team_id" });
   };
